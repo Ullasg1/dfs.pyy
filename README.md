@@ -1,22 +1,20 @@
-def bfs(graph, start_node):
-   
+def dfs_with_stack(graph, start):
+ 
+  
+    stack = [start]
     visited = set()
-    
-    queue = deque([start])
-   
-    visited.add(start)
-    
-    while queue:
-     
-        current_node = queue.popleft()
-        print(current_node, end=" ")  
-        
+    while stack:
        
-        for neighbor in graph[current_node]:
-            if neighbor not in visited:
-                visited.add(neighbor)
-                queue.append(neighbor)
-
+        current_node = stack.pop()
+        if current_node not in visited:
+          
+            visited.add(current_node)
+            print(current_node, end=" ")  # Process the node (print it in this case)
+            
+          
+            for neighbor in reversed(graph[current_node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
 
 graph = {
     'A': ['B', 'C'],
@@ -28,4 +26,4 @@ graph = {
 }
 
 
-bfs(graph, 'A')
+dfs_with_stack(graph, 'A')
